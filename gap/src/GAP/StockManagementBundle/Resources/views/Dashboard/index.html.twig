@@ -1,0 +1,255 @@
+{% extends "GAPStockManagementBundle::layout.html.twig" %}
+{% block body %}
+    <div class="wrapper">
+
+        <header class="main-header">               
+            <nav class="navbar navbar-static-top" style="margin-left: 0px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="../../index.html" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">{{ app.user.username }}</a></li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">Deconnexion</a>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+        <!-- Right side column. Contains the navbar and content of the page -->
+
+        <div class="content-wrapper" style="margin-left: 0px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Ecran d'accueil
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content" style="padding-top: 0px; margin: 15px 15px 0px 15px;">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+
+                    <!-- Commandes -->
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                            <h3 class="box-title">Ecran des commandes</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-10">
+                                <div class="box-body">
+                                    <div class="box box-solid box-primary">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Commande en attente</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                ID
+                                                            </th>
+                                                            <th>
+                                                                Service
+                                                            </th>
+                                                            <th>
+                                                                Molecule
+                                                            </th>
+                                                            <th>
+                                                                Dosage
+                                                            </th>
+                                                            <th>
+                                                                Quantité
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>generaliste</td>
+                                                            <td>Paracétamole</td>
+                                                            <td>1000 mg</td>
+                                                            <td>15</td>
+                                                            <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Urgence</td>
+                                                            <td>Paracétamole</td>
+                                                            <td>1000 mg</td>
+                                                            <td> 15</td>
+                                                            <td><a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>Radiologie</td>
+                                                            <td>Paracétamole</td>
+                                                            <td>1000 mg</td>
+                                                            <td> 15</td>
+                                                            <td>
+                                                                <a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+                                        </div><!-- /.box-footer-->
+                                    </div><!-- /.box -->
+                                </div><!-- /.box-body -->
+                            </div>
+                            <div class="col-sm-6 col-xs-10">
+                                <div class="box-body">
+                                    <div class="box box-solid box-primary">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Vos commande en cours</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>
+                                                                ID
+                                                            </th>
+                                                            <th>
+                                                                Service
+                                                            </th>
+                                                            <th>
+                                                                Molecule
+                                                            </th>
+                                                            <th>
+                                                                Dosage
+                                                            </th>
+                                                            <th>
+                                                                Quantité
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>generaliste</td>
+                                                            <td>Paracétamole</td>
+                                                            <td>1000 mg</td>
+                                                            <td>15</td>
+                                                            <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Urgence</td>
+                                                            <td>Paracétamole</td>
+                                                            <td>1000 mg</td>
+                                                            <td> 15</td>
+                                                            <td><a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>Radiologie</td>
+                                                            <td>Paracétamole</td>
+                                                            <td>1000 mg</td>
+                                                            <td> 15</td>
+                                                            <td>
+                                                                <a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+                                        </div><!-- /.box-footer-->
+                                    </div><!-- /.box -->
+                                </div><!-- /.box-body -->
+                            </div>
+                        </div>
+                    </div>
+                    <section class="col-xs-7 ">
+                        <!-- Commande Rapide -->
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <i class="glyphicon glyphicon-briefcase"></i>
+                                <h3 class="box-title">Commande Rapide</h3>
+                            </div>
+                            <div class="box-body">
+                                <form action="#" method="post">
+                                    <div class="form-group">
+                                        <label>Services</label>
+                                        <input type="text" class="form-control" name="service" placeholder="chirurgie"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Molecule</label>
+                                        <input type="text" class="form-control" name="Molecule" placeholder="paracétamol"/>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label>Dosage</label>
+                                        <input type="text" class="form-control" name="dosage" placeholder="500 mg"/>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label>Quantité</label>
+                                        <input type="text" class="form-control" name="quantite" placeholder="10"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Commentaire</label>
+                                        <textarea class="form-control" rows="3" placeholder="..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="box-footer clearfix">
+                                <button class="pull-right btn btn-default" id="envoieCommande">Validez <i class="fa fa-arrow-circle-right"></i></button>
+                            </div>
+                        </div>
+
+                    </section><!-- /.Left col -->
+                    <!-- right col-->
+                    <section class="col-xs-5 ">
+
+                        <!-- Alertes Stock -->
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <i class="fa fa-warning"></i>
+                                <h3 class="box-title">Alertes du stock</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="alert alert-warning alert-dismissable">
+                                    <h4><i class="icon fa fa-warning"></i> Alerte Minimal</h4>
+                                    Vous avez <a href="#" data-toggle="modal" data-target="#AlertModal">X</a> médicament en stock minimal
+                                </div>
+                                <div class="alert alert-danger alert-dismissable">
+                                    <h4><i class="icon fa fa-ban"></i> Alerte Critique</h4>
+                                    Vous avez <a href="#" data-toggle="modal" data-target="#AlertModal">X</a> médicament en stock critique
+                                </div>
+                            </div><!-- /.box-body -->
+                        </div>
+                        <div class="box-body">
+
+                        </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </section><!-- right col -->
+        </div><!-- /.row (main row) -->
+
+    </div><!-- /.content-wrapper -->
+    <footer class="main-footer" style="margin-left: 0;">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.0
+        </div>
+        <strong>Copyright &copy; 2015-2016 <a href="http://Mydev.fr">My dev'</a>.</strong> Tous droit reservés.
+    </footer>
+</div><!-- ./wrapper -->
+{% endblock %}
