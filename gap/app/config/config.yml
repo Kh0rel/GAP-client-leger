@@ -80,8 +80,12 @@ services:
         class:        "%sortie.class%"
     notification:
         class:        "%notification.class%"
-#FOS USER BUNDLE        
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: GAP\UserBundle\Entity\User
+
+fos_js_routing:
+    cache_control:
+
+        public: false
+        maxage: null
+        smaxage: null
+        expires: null
+        vary: []

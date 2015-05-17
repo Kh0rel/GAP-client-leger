@@ -1,10 +1,10 @@
 security:
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
+        main:
+            entity: { class: GAP\UserBundle\Entity\User, property: username }
 
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        GAP\UserBundle\Entity\User: plaintext
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -13,30 +13,26 @@ security:
     firewalls:
         main:
             pattern: .*
+            provider:  main
             form_login:
-                provider:      fos_userbundle
                 csrf_provider: form.csrf_provider
-                login_path:    fos_user_security_login
+                login_path: GAPUserLogin
+                check_path: login_check
                 use_forward:   false
-                check_path:    fos_user_security_check
                 failure_path:  null
-                default_target_path: /
+                default_target_path: /login
                 remember_me:   true
-            remember_me:
-                key:      %secret%
-                lifetime: 300000
-                path:     /
-            logout:       
-                path:          fos_user_security_logout
-                target:        /
+            logout:
+                path:   logout
+                target: /
             anonymous:    true
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         login:
-            pattern:  ^/demo/secured/login$
-            security: false
+            pattern: ^/login$
+            anonymous: true
 
         secured_area:
             pattern:    ^/demo/secured/

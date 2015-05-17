@@ -8,7 +8,6 @@ class GAPUserBundle extends Bundle {
 
     public function getParent() {
         
-        return 'FOSUserBundle';
     }
 
 }
