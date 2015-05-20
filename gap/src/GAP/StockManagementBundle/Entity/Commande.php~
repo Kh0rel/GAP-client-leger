@@ -71,4 +71,50 @@ class Commande
     {
         return $this->date;
     }
+
+    /**
+     * Set distributeur
+     *
+     * @param \GAP\StockManagementBundle\Entity\distributeur $distributeur
+     * @return Commande
+     */
+    public function setDistributeur(\GAP\StockManagementBundle\Entity\distributeur $distributeur)
+    {
+        $this->distributeur = $distributeur;
+
+        return $this;
+    }
+
+    /**
+     * Get distributeur
+     *
+     * @return \GAP\StockManagementBundle\Entity\distributeur 
+     */
+    public function getDistributeur()
+    {
+        return $this->distributeur;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \GAP\UserBundle\Entity\User $user
+     * @return Commande
+     */
+    public function setUser(\GAP\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \GAP\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

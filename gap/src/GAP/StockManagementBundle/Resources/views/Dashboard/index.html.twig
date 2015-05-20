@@ -188,31 +188,35 @@
                                 <h3 class="box-title">Commande Rapide</h3>
                             </div>
                             <div class="box-body">
-                                <form action="#" method="post">
+                                {% for message in app.session.flashbag.get('notice') %}
+                                    <p>{{ message }}</p>
+                                {% endfor %}
+                                {{ form_start(form) }}
                                     <div class="form-group">
-                                        <label>Services</label>
-                                        <input type="text" class="form-control" name="service" placeholder="chirurgie"/>
+                                    {{ form_label(form.service) }}
+                                    {{ form_widget(form.service, {'attr': {'class' : 'form-control'}}) }}
                                     </div>
                                     <div class="form-group">
-                                        <label>Molecule</label>
-                                        <input type="text" class="form-control" name="Molecule" placeholder="paracétamol"/>
+                                    {{ form_label(form.molecule) }}
+                                    {{ form_widget(form.molecule, {'attr': {'class' : 'form-control'}}) }}
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label>Dosage</label>
-                                        <input type="text" class="form-control" name="dosage" placeholder="500 mg"/>
+                                    {{ form_label(form.dosage) }}
+                                    {{ form_widget(form.dosage, {'attr': {'class' : 'form-control'}}) }}
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label>Quantité</label>
-                                        <input type="text" class="form-control" name="quantite" placeholder="10"/>
+                                    {{ form_label(form.quantite) }}
+                                    {{ form_widget(form.quantite, {'attr': {'class' : 'form-control'}}) }}
                                     </div>
+
                                     <div class="form-group">
-                                        <label>Commentaire</label>
-                                        <textarea class="form-control" rows="3" placeholder="..."></textarea>
+                                    {{ form_label(form.description) }}
+                                    {{ form_widget(form.description, {'attr': {'class' : 'form-control'}}) }}
                                     </div>
-                                </form>
-                            </div>
-                            <div class="box-footer clearfix">
-                                <button class="pull-right btn btn-default" id="envoieCommande">Validez <i class="fa fa-arrow-circle-right"></i></button>
+                                    <div class="box-footer clearfix">
+                                        {{ form_widget(form.envoyer, {'attr': {'class' : 'pull-right btn btn-default'}}) }}
+                                    </div>
+                                    {{ form_end(form) }}
                             </div>
                         </div>
 

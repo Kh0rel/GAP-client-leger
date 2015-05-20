@@ -92,4 +92,27 @@ class Carton {
         return $this->datePeremption;
     }
 
+
+    /**
+     * Set medicament
+     *
+     * @param \GAP\StockManagementBundle\Entity\medicament $medicament
+     * @return Carton
+     */
+    public function setMedicament(\GAP\StockManagementBundle\Entity\medicament $medicament)
+    {
+        $this->medicament = $medicament;
+
+        return $this;
+    }
+
+    /**
+     * Get medicament
+     *
+     * @return \GAP\StockManagementBundle\Entity\medicament 
+     */
+    public function getMedicament()
+    {
+        return $this->medicament;
+    }
 }

@@ -12,4 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ServiceRepository extends EntityRepository
 {
+    public function getServiceQuery(){
+        return $this->createQueryBuilder('S');
+    }
 }

@@ -291,4 +291,17 @@ class Medicament {
         return $this->dosage;
     }
 
+
+    /**
+     * Set laboratoire
+     *
+     * @param \GAP\StockManagementBundle\Entity\Laboratoire $laboratoire
+     * @return Medicament
+     */
+    public function setLaboratoire(\GAP\StockManagementBundle\Entity\Laboratoire $laboratoire = null)
+    {
+        $this->laboratoire = $laboratoire;
+
+        return $this;
+    }
 }

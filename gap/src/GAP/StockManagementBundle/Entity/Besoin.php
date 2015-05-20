@@ -50,22 +50,18 @@ class Besoin {
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GAP\StockManagementBundle\Entity\Service")
+     * @ORM\ManyToOne(targetEntity="Service", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $service;
 
     /**
-     * @ORM\OneToOne(targetEntity="GAP\StockManagementBundle\Entity\Molecule")
+     * @ORM\ManyToOne(targetEntity="Molecule", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $molecule;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="GAP\StockManagementBundle\Entity\commande")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $commande;
+
 
     public function __construct() {
         $this->date = new \DateTime();

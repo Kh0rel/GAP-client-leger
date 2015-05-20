@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class BesoinRepository extends EntityRepository {
 
+    public function getAll() {
+
+        $qb = $this->createQueryBuilder('b')
+            ->leftJoin('b.service', 's')
+            ->addSelect('s')
+            ->orderBy('b.date', 'DESC');
+
+
+        return $qb->getQuery()->getResult();
+    }
 }

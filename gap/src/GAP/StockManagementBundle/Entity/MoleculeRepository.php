@@ -12,4 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class MoleculeRepository extends EntityRepository
 {
+    public function getMoleculeQuery(){
+        return $this->createQueryBuilder('M');
+
+    }
 }
