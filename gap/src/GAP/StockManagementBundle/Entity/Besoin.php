@@ -61,6 +61,12 @@ class Besoin {
      */
     private $molecule;
 
+    /**
+     * @ORM\ManyToONe(targetEntity="GAP\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
+
 
 
     public function __construct() {
@@ -228,5 +234,28 @@ class Besoin {
     public function getDosage()
     {
         return $this->dosage;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \GAP\UserBundle\Entity\User $user
+     * @return Besoin
+     */
+    public function setUser(\GAP\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \GAP\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

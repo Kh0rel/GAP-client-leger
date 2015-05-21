@@ -21,13 +21,17 @@ class IndexController extends Controller {
      * @Template("GAPStockManagementBundle:Dashboard:index.html.twig")
      */
     public function indexAction(Request $request) {
-        $listCommande = $this->getDoctrine()->getManager()
+        $listWaitingCommande = $this->getDoctrine()->getManager()
                             ->getRepository("GAPStockManagementBundle:Besoin")
                             ->getAll();
-
+        $listYourCommande = $this->getDoctrine()->getManager()
+                            ->getRepository("GAPStockManagementBundle:Besoin")
+                            ->getAllByUser($this->get('security.context')->getToken()
+                                            ->getUser()->getId());
+        //création du formulaire
         $besoin = new besoin();
         $formBesoin = $this->get('form.factory')->create(new BesoinType(), $besoin);
-
+        // Soumission du formulaire
         if($formBesoin->handleRequest($request)->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->persist($besoin);
@@ -36,7 +40,8 @@ class IndexController extends Controller {
         }
 
 
-        return array('listCommande' => $listCommande,
+        return array('listCommandes' => $listWaitingCommande,
+                     'listYourCommandes' => $listYourCommande,
                      'form' => $formBesoin->createView());
     }
 
@@ -47,14 +52,6 @@ class IndexController extends Controller {
 
         return array();
     }
-    /**
-     * @Route("/addCommande", name="GAPAddCommande")
-     */
-    public function addCommandeAction(Request $request) {
 
-
-        $this->redirect($this->generateUrl('dashboard_home'), 301);
-
-    }
 
 }

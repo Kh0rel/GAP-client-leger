@@ -56,10 +56,16 @@ class Besoin {
     private $service;
 
     /**
-     * @ORM\OneToOne(targetEntity="Molecule", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Molecule", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $molecule;
+
+    /**
+     * @ORM\ManyToONe(targetEntity="GAP\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
 
 
 

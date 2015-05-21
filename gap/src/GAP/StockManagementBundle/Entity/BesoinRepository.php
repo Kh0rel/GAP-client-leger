@@ -16,9 +16,25 @@ class BesoinRepository extends EntityRepository {
 
         $qb = $this->createQueryBuilder('b')
             ->leftJoin('b.service', 's')
+            ->leftJoin('b.molecule', 'm')
             ->addSelect('s')
+            ->addSelect('m')
             ->orderBy('b.date', 'DESC');
 
+
+        return $qb->getQuery()->getResult();
+    }
+    public function getAllByUser($idUsername) {
+
+        $qb = $this->createQueryBuilder('b')
+            ->leftJoin('b.service', 's')
+            ->leftJoin('b.molecule','m')
+            ->leftJoin('b.user', 'u')
+            ->addSelect('s')
+            ->addSelect('m')
+            ->addSelect('u')
+            ->where('u.id = ?1')
+            ->setParameter(1, $idUsername);
 
         return $qb->getQuery()->getResult();
     }

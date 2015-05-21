@@ -58,11 +58,12 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Commande en attente</h3>
                                         </div>
-                                        <div class="box-body">
+                                        <div class="box-body overflow">
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <tbody>
                                                         <tr>
+
                                                             <th>
                                                                 ID
                                                             </th>
@@ -80,32 +81,17 @@
                                                             </th>
                                                             <th></th>
                                                         </tr>
+                                                        {% for commande in listCommandes %}
                                                         <tr>
-                                                            <td>1</td>
-                                                            <td>generaliste</td>
-                                                            <td>Paracétamole</td>
-                                                            <td>1000 mg</td>
-                                                            <td>15</td>
+
+                                                            <td>{{ commande.id }}</td>
+                                                            <td>{{ commande.service.nom }}</td>
+                                                            <td>{{ commande.molecule.nomMol }}</td>
+                                                            <td>{{ commande.dosage }}</td>
+                                                            <td>{{ commande.quantite }}</td>
                                                             <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Urgence</td>
-                                                            <td>Paracétamole</td>
-                                                            <td>1000 mg</td>
-                                                            <td> 15</td>
-                                                            <td><a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Radiologie</td>
-                                                            <td>Paracétamole</td>
-                                                            <td>1000 mg</td>
-                                                            <td> 15</td>
-                                                            <td>
-                                                                <a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a>
-                                                            </td>
-                                                        </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -121,7 +107,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Vos commande en cours</h3>
                                         </div>
-                                        <div class="box-body">
+                                        <div class="box-body overflow">
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <tbody>
@@ -143,32 +129,17 @@
                                                             </th>
                                                             <th></th>
                                                         </tr>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>generaliste</td>
-                                                            <td>Paracétamole</td>
-                                                            <td>1000 mg</td>
-                                                            <td>15</td>
-                                                            <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Urgence</td>
-                                                            <td>Paracétamole</td>
-                                                            <td>1000 mg</td>
-                                                            <td> 15</td>
-                                                            <td><a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Radiologie</td>
-                                                            <td>Paracétamole</td>
-                                                            <td>1000 mg</td>
-                                                            <td> 15</td>
-                                                            <td>
-                                                                <a href="#" data-toggle="modal" data-target="#CommandeModal"> Voir details </a>
-                                                            </td>
-                                                        </tr>
+                                                        {% for commande in listYourCommandes %}
+                                                            <tr>
+
+                                                                <td>{{ commande.id }}</td>
+                                                                <td>{{ commande.service.nom }}</td>
+                                                                <td>{{ commande.molecule.nomMol }}</td>
+                                                                <td>{{ commande.dosage }}</td>
+                                                                <td>{{ commande.quantite }}</td>
+                                                                <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
+                                                            </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -1,0 +1,4 @@
+.box-body.overflow {
+    overflow-y: scroll;
+    height: 168px;
+}
