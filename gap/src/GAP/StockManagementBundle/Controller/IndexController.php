@@ -17,20 +17,10 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class IndexController extends Controller {
 
     /**
-     * @Route("/", name="dashboard_home")
+     * @Route("/", name="gap.dashboard_home")
      * @Template("GAPStockManagementBundle:Dashboard:index.html.twig")
      */
     public function indexAction(Request $request) {
-        $listWaitingOrder = $this->getDoctrine()->getManager()
-                            ->getRepository("GAPStockManagementBundle:Besoin")
-                            ->getAll();
-        $listYourOrder = $this->getDoctrine()->getManager()
-                            ->getRepository("GAPStockManagementBundle:Besoin")
-                            ->getAllByUser($this->get('security.context')->getToken()
-                                            ->getUser()->getId());
-        $listAlert = $this->getDoctrine()->getManager()
-                                ->getRepository("GAPStockManagementBundle:Medicament")
-                                ->getAll();
 
         //création du formulaire
         $besoin = new besoin();
@@ -43,21 +33,25 @@ class IndexController extends Controller {
             $request->getSession()->getFlashBag()->add('notice', 'Commande bien enregistrée.');
         }
 
+        $listWaitingOrder = $this->getDoctrine()->getManager()
+            ->getRepository("GAPStockManagementBundle:Besoin")
+            ->getAll();
+
+        $listYourOrder = $this->getDoctrine()->getManager()
+            ->getRepository("GAPStockManagementBundle:Besoin")
+            ->getAllByUser($this->get('security.context')->getToken()
+                ->getUser()->getId());
+
+        $listAlert = $this->getDoctrine()->getManager()
+            ->getRepository("GAPStockManagementBundle:Medicament")
+            ->findAll();
+
+
 
         return array('listCommandes' => $listWaitingOrder,
                      'listYourCommandes' => $listYourOrder,
                      'listAlert' => $listAlert,
                      'form' => $formBesoin->createView());
-    }
-
-    /**
-     * @Route("/refresh/waitingOrder", name="GAP.Display.Waiting.Order", options={"expose" = true})
-     */
-    public function refreshWaitingOrderAction() {
-            $listWaitingOrder = $this->getDoctrine()->getManager()
-                                ->getRepository("GAPStockManagementBundle:Besoin")
-                                ->getAllByNoAffect();
-        return array();
     }
 
     /**
@@ -87,6 +81,42 @@ class IndexController extends Controller {
 
         return array('listCommandes' => $listYourOrder);
     }
+    /**
+     * @Route("/commande/affecter/{id}", name="gap.affecter")
+     */
+    public function affectAction($id) {
 
+            $em = $this->getDoctrine()->getManager();
+            $OrderRepository = $em->getRepository('GAPStockManagementBundle:Besoin');
+            $UserRepository = $em->getRepository('GAPUserBundle:User');
+            $besoin = $OrderRepository->find($id);
+            $user = $UserRepository->find($this->get('security.context')->getToken()
+                                               ->getUser()->getId());
 
+            $besoin->setUser($user);
+
+            $em->persist($besoin);
+
+            $em->flush();
+
+        return $this->redirect($this->generateUrl('gap.dashboard_home'));
+    }
+
+    /**
+     * @Route("/ycommande/valider/{id}", name="gap.valid")
+     */
+    public function validOrderAction($id) {
+
+        $em = $this->getDoctrine()->getManager();
+        $OrderRepository = $em->getRepository('GAPStockManagementBundle:Besoin');
+        $besoin = $OrderRepository->find($id);
+
+        $besoin->setValid(true);
+
+        $em->persist($besoin);
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('gap.dashboard_home'));
+    }
 }

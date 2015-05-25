@@ -6,7 +6,7 @@
             <nav class="navbar navbar-static-top" style="margin-left: 0px;">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="{{ path('dashboard_home') }}" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
+                        <a href="{{ path('gap.dashboard_home') }}" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -83,16 +83,18 @@
                                                             <th></th>
                                                         </tr>
                                                         {% for commande in listCommandes %}
-                                                        <tr>
+                                                            {% if commande.user == NULL %}
+                                                                <tr>
 
-                                                            <td>{{ commande.id }}</td>
-                                                            <td>{{ commande.service.nom }}</td>
-                                                            <td>{{ commande.molecule.nomMol }}</td>
-                                                            <td>{{ commande.dosage }}</td>
-                                                            <td>{{ commande.quantite }}</td>
+                                                                    <td>{{ commande.id }}</td>
+                                                                    <td>{{ commande.service.nom }}</td>
+                                                                    <td>{{ commande.molecule.nomMol }}</td>
+                                                                    <td>{{ commande.dosage }}</td>
+                                                                    <td>{{ commande.quantite }}</td>
 
 
-                                                        </tr>
+                                                                </tr>
+                                                            {% endif %}
                                                         {% endfor %}
                                                     </tbody>
                                                 </table>
@@ -141,7 +143,6 @@
                                                                 <td>{{ commande.molecule.nomMol }}</td>
                                                                 <td>{{ commande.dosage }}</td>
                                                                 <td>{{ commande.quantite }}</td>
-                                                                <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
                                                             </tr>
                                                         {% endfor %}
                                                     </tbody>
@@ -270,7 +271,6 @@
                                                     {% if alert.quantite < alert.stockMini  %}
                                                         {% if alert.quantite > alert.stockCritique %}
                                                             <tr>
-
                                                                 <td>
                                                                     {{ alert.nomMed }}
                                                                 </td>

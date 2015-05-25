@@ -48,7 +48,14 @@ class Besoin {
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid;
 
+    
     /**
      * @ORM\ManyToOne(targetEntity="Service", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
@@ -257,5 +264,28 @@ class Besoin {
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set valid
+     *
+     * @param boolean $valid
+     * @return Besoin
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get valid
+     *
+     * @return boolean 
+     */
+    public function getValid()
+    {
+        return $this->valid;
     }
 }

@@ -12,18 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class BesoinRepository extends EntityRepository {
 
-    public function getAll() {
 
-        $qb = $this->createQueryBuilder('b')
-            ->leftJoin('b.service', 's')
-            ->leftJoin('b.molecule', 'm')
-            ->addSelect('s')
-            ->addSelect('m')
-            ->orderBy('b.date', 'DESC');
-
-
-        return $qb->getQuery()->getResult();
-    }
     public function getAllByUser($idUsername) {
 
         $qb = $this->createQueryBuilder('b')
@@ -33,31 +22,20 @@ class BesoinRepository extends EntityRepository {
             ->addSelect('s')
             ->addSelect('m')
             ->addSelect('u')
-            ->where('u.id = ?1')
+            ->where('u.id = ?1 AND b.valid = 0')
             ->setParameter(1, $idUsername);
 
         return $qb->getQuery()->getResult();
     }
-    public function getAllByNoAffect() {
-        $qb = $this->createQueryBuilder('b')
-            ->leftJoin('b.service', 's')
-            ->leftJoin('b.molecule', 'm')
-            ->leftJoin('b.user', 'u')
-            ->addSelect('s')
-            ->addSelect('m')
-            ->orderBy('b.date', 'DESC')
-            ->where('b.user = NULL');
-    }
-    public function getAllWithMedic() {
+    public function getAll() {
         $qb = $this->createQueryBuilder('b')
                    ->leftJoin('b.service', 's')
-                   ->leftJoin('b.molecule', 'm')
-                   ->leftJoin('m.medicament','me')
+                   ->leftJoin('b.molecule','m')
                    ->addSelect('s')
                    ->addSelect('m')
-                   ->addSelect('me')
-                   ->orderBy('b.date', 'DESC');
+                   ->where('b.valid = 0');
 
         return $qb->getQuery()->getResult();
     }
+
 }

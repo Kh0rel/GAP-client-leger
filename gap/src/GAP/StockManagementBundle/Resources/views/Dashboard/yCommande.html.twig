@@ -6,7 +6,7 @@
             <nav class="navbar navbar-static-top" style="margin-left: 0px;">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="{{ path('dashboard_home') }}" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
+                        <a href="{{ path('gap.dashboard_home') }}" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -66,6 +66,7 @@
                                           <th>Quantité</th>
                                           <th>Description</th>
                                           <th></th>
+                                          <th></th>
 
                                         </tr>
                                         {% for commande in listCommandes %}
@@ -77,9 +78,9 @@
                                           <td>{{ commande.quantite }}</td>
                                           <td>{{ commande.description }}</td>
                                           <td>John Doe</td>
-                                          <td><button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#navbar-collapse">
-                                              Affecter
-                                              </button>
+                                          <td><a href="{{ path('gap.valid', {'id': commande.id}) }}" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#navbar-collapse">
+                                              terminer
+                                              </a>
                                           </td>
                                         </tr>
                                         {% endfor %}

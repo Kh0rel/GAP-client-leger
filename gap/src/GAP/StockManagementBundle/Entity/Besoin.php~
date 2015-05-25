@@ -48,7 +48,14 @@ class Besoin {
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid;
 
+    
     /**
      * @ORM\ManyToOne(targetEntity="Service", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
@@ -234,5 +241,28 @@ class Besoin {
     public function getDosage()
     {
         return $this->dosage;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \GAP\UserBundle\Entity\User $user
+     * @return Besoin
+     */
+    public function setUser(\GAP\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \GAP\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
