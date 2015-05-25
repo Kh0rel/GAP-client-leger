@@ -21,13 +21,17 @@ class IndexController extends Controller {
      * @Template("GAPStockManagementBundle:Dashboard:index.html.twig")
      */
     public function indexAction(Request $request) {
-        $listWaitingCommande = $this->getDoctrine()->getManager()
+        $listWaitingOrder = $this->getDoctrine()->getManager()
                             ->getRepository("GAPStockManagementBundle:Besoin")
                             ->getAll();
-        $listYourCommande = $this->getDoctrine()->getManager()
+        $listYourOrder = $this->getDoctrine()->getManager()
                             ->getRepository("GAPStockManagementBundle:Besoin")
                             ->getAllByUser($this->get('security.context')->getToken()
                                             ->getUser()->getId());
+        $listAlert = $this->getDoctrine()->getManager()
+                                ->getRepository("GAPStockManagementBundle:Medicament")
+                                ->getAll();
+
         //création du formulaire
         $besoin = new besoin();
         $formBesoin = $this->get('form.factory')->create(new BesoinType(), $besoin);
@@ -40,17 +44,48 @@ class IndexController extends Controller {
         }
 
 
-        return array('listCommandes' => $listWaitingCommande,
-                     'listYourCommandes' => $listYourCommande,
+        return array('listCommandes' => $listWaitingOrder,
+                     'listYourCommandes' => $listYourOrder,
+                     'listAlert' => $listAlert,
                      'form' => $formBesoin->createView());
     }
 
     /**
-     * @Route("", name="modal_commande")
+     * @Route("/refresh/waitingOrder", name="GAP.Display.Waiting.Order", options={"expose" = true})
      */
-    public function modalAction() {
-
+    public function refreshWaitingOrderAction() {
+            $listWaitingOrder = $this->getDoctrine()->getManager()
+                                ->getRepository("GAPStockManagementBundle:Besoin")
+                                ->getAllByNoAffect();
         return array();
+    }
+
+    /**
+     * @Route("/commande", name="gap.commande")
+     * @Template("GAPStockManagementBundle:Dashboard:commande.html.twig")
+     */
+    public function commandeAction() {
+        $listWaitingOrder = $this->getDoctrine()->getManager()
+                                ->getRepository("GAPStockManagementBundle:Besoin")
+                                ->getAll();
+
+
+
+        return array('listCommandes' => $listWaitingOrder);
+    }
+    /**
+     * @Route("/ycommande", name="gap.your.commande")
+     * @Template("GAPStockManagementBundle:Dashboard:yCommande.html.twig")
+     */
+    public function yourCommandeAction() {
+        $listYourOrder = $this->getDoctrine()->getManager()
+            ->getRepository("GAPStockManagementBundle:Besoin")
+            ->getAllByUser($this->get('security.context')->getToken()
+                ->getUser()->getId());
+
+
+
+        return array('listCommandes' => $listYourOrder);
     }
 
 

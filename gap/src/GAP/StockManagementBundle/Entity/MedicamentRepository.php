@@ -13,5 +13,10 @@ use Doctrine\ORM\EntityRepository;
 class MedicamentRepository extends EntityRepository
 {
 
+    public function getAll() {
+        $qb = $this->createQueryBuilder('M');
 
+
+        return $qb->getQuery()->getResult();
+    }
 }

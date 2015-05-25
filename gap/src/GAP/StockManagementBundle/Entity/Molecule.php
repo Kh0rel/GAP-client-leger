@@ -41,8 +41,10 @@ class Molecule
      * @ORM\Column(name="etatMol", type="string", length=255)
      */
     private $etatMol;
-
-
+    /**
+     * @ORM\ManyToMany(targetEntity="GAP\StockManagementBundle\Entity\Medicament", cascade={"persist"})
+     */
+    private $medicament;
     /**
      * Get id
      *
@@ -120,5 +122,45 @@ class Molecule
     public function getEtatMol()
     {
         return $this->etatMol;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->medicament = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add medicament
+     *
+     * @param \GAP\StockManagementBundle\Entity\Medicament $medicament
+     * @return Molecule
+     */
+    public function addMedicament(\GAP\StockManagementBundle\Entity\Medicament $medicament)
+    {
+        $this->medicament[] = $medicament;
+
+        return $this;
+    }
+
+    /**
+     * Remove medicament
+     *
+     * @param \GAP\StockManagementBundle\Entity\Medicament $medicament
+     */
+    public function removeMedicament(\GAP\StockManagementBundle\Entity\Medicament $medicament)
+    {
+        $this->medicament->removeElement($medicament);
+    }
+
+    /**
+     * Get medicament
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedicament()
+    {
+        return $this->medicament;
     }
 }

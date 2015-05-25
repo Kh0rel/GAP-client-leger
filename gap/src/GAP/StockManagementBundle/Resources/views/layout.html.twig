@@ -34,33 +34,15 @@
         {% block body %}
             
         {% endblock %}
-        
-        {% include 'GAPStockManagementBundle:modal:modal.commande.html.twig' %}
-        {% include 'GAPStockManagementBundle:modal:modal.alert.html.twig'  %}
-        
+
         {% javascripts
             '@GAPStockManagementBundle/Resources/public/js/*/*'
+            '@GAPStockManagementBundle/Resources/public/js/displayModalOrder.js'
         %}
         <script src="{{ asset_url }}"></script>
-        <script>
-            $(document).ready(function () {
-                $(".details").click(function () {
-                    var id = $(this).attr("data-id")
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
-
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ path('modal_commande')}}",
-                        data: id,
-                        cache: false,
-                        success: function () {
-
-                        }
-                    });
-                });
-            })
-
-        </script>
         {% endjavascripts %} 
 
 

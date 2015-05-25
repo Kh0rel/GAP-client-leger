@@ -36,10 +36,10 @@ class Carton {
     private $datePeremption;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GAP\StockManagementBundle\Entity\medicament")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="GAP\StockManagementBundle\Entity\Medicament")
      */
     private $medicament;
+
 
     /**
      * Get id

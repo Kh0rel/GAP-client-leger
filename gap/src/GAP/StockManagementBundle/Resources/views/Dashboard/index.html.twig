@@ -6,7 +6,7 @@
             <nav class="navbar navbar-static-top" style="margin-left: 0px;">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="../../index.html" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
+                        <a href="{{ path('dashboard_home') }}" class="navbar-brand"><b>GAP </b><small>gestion de stock automatisé</small></a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -56,7 +56,8 @@
                                 <div class="box-body">
                                     <div class="box box-solid box-primary">
                                         <div class="box-header">
-                                            <h3 class="box-title">Commande en attente</h3>
+                                            <h3 class="box-title">Commande en attente </h3>
+                                            <h4><a class="pull-right" href="{{ path('gap.commande') }}">Voir détails</a></h4>
                                         </div>
                                         <div class="box-body overflow">
                                             <div class="table-responsive">
@@ -89,13 +90,15 @@
                                                             <td>{{ commande.molecule.nomMol }}</td>
                                                             <td>{{ commande.dosage }}</td>
                                                             <td>{{ commande.quantite }}</td>
-                                                            <td><a href="#" class="details" data-toggle="modal" data-target="#CommandeModal" data-id="1" > Voir details </a></td>
+
+
                                                         </tr>
                                                         {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div><!-- /.box-body -->
+
                                         <div class="box-footer">
                                         </div><!-- /.box-footer-->
                                     </div><!-- /.box -->
@@ -105,7 +108,8 @@
                                 <div class="box-body">
                                     <div class="box box-solid box-primary">
                                         <div class="box-header">
-                                            <h3 class="box-title">Vos commande en cours</h3>
+                                            <h3 class="box-title .col-xs-12 .col-md-8">Vos commande en cours  </h3>
+                                            <h4><a class="pull-right" href="{{ path('gap.your.commande') }}">Voir détails</a></h4>
                                         </div>
                                         <div class="box-body overflow">
                                             <div class="table-responsive">
@@ -202,16 +206,89 @@
                                 <h3 class="box-title">Alertes du stock</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="alert alert-warning alert-dismissable">
-                                    <h4><i class="icon fa fa-warning"></i> Alerte Minimal</h4>
-                                    Vous avez <a href="#" data-toggle="modal" data-target="#AlertModal">X</a> médicament en stock minimal
-                                </div>
-                                <div class="alert alert-danger alert-dismissable">
-                                    <h4><i class="icon fa fa-ban"></i> Alerte Critique</h4>
-                                    Vous avez <a href="#" data-toggle="modal" data-target="#AlertModal">X</a> médicament en stock critique
-                                </div>
-                            </div><!-- /.box-body -->
+                                <div class="box box-solid box-danger">
+                                    <div class="box-header">
+                                        <h3 class="box-title .col-xs-12 .col-md-8">Alerte Stock Critique  </h3>
+                                    </div>
+                                    <div class="box-body overflow">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>
+                                                        Medicament
+                                                    </th>
+                                                    <th>
+                                                        Stock
+                                                    </th>
+                                                    <th>
+                                                        Stock Critique
+                                                    </th>
+                                                </tr>
+                                                {% for alert in listAlert %}
+                                                    {% if alert.quantite < alert.stockCritique  %}
+                                                    <tr>
+
+                                                        <td>
+                                                            {{ alert.nomMed }}
+                                                        </td>
+                                                        <td>
+                                                             {{ alert.quantite }}
+                                                        </td>
+                                                        <td>
+                                                            {{ alert.stockCritique }}
+                                                        </td>
+
+                                                    </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div><!-- /.box-body -->
                         </div>
+                                <div class="box box-solid box-warning">
+                                    <div class="box-header">
+                                        <h3 class="box-title .col-xs-12 .col-md-8">Alerte Stock minimal  </h3>
+                                    </div>
+                                    <div class="box-body overflow">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>
+                                                        Medicament
+                                                    </th>
+                                                    <th>
+                                                        Stock
+                                                    </th>
+                                                    <th>
+                                                        Stock Minimal
+                                                    </th>
+                                                </tr>
+                                                {% for alert in listAlert %}
+                                                    {% if alert.quantite < alert.stockMini  %}
+                                                        {% if alert.quantite > alert.stockCritique %}
+                                                            <tr>
+
+                                                                <td>
+                                                                    {{ alert.nomMed }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ alert.quantite }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ alert.stockCritique }}
+                                                                </td>
+                                                            </tr>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                         <div class="box-body">
 
                         </div><!-- /.box-body -->

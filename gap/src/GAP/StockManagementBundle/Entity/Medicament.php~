@@ -36,12 +36,6 @@ class Medicament {
      */
     private $refMed;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="marqueMed", type="string", length=255)
-     */
-    private $marqueMed;
 
     /**
      * @var string
@@ -79,6 +73,12 @@ class Medicament {
     private $dosage;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite", type="integer")
+     */
+    private $quantite;
+    /**
      * @ORM\ManyToMany(targetEntity="GAP\StockManagementBundle\Entity\molecule", cascade={"persist"})
      */
     private $molecules;
@@ -87,6 +87,7 @@ class Medicament {
      * @ORM\ManyToOne(targetEntity="GAP\StockManagementBundle\Entity\Laboratoire")
      */
     private $laboratoire;
+
     
     /**
      * Construct
@@ -303,5 +304,28 @@ class Medicament {
         $this->laboratoire = $laboratoire;
 
         return $this;
+    }
+
+    /**
+     * Set carton
+     *
+     * @param \GAP\StockManagementBundle\Entity\Carton $carton
+     * @return Medicament
+     */
+    public function setCarton(\GAP\StockManagementBundle\Entity\Carton $carton)
+    {
+        $this->carton = $carton;
+
+        return $this;
+    }
+
+    /**
+     * Get carton
+     *
+     * @return \GAP\StockManagementBundle\Entity\Carton 
+     */
+    public function getCarton()
+    {
+        return $this->carton;
     }
 }

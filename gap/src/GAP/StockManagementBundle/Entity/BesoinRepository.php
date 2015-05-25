@@ -38,4 +38,26 @@ class BesoinRepository extends EntityRepository {
 
         return $qb->getQuery()->getResult();
     }
+    public function getAllByNoAffect() {
+        $qb = $this->createQueryBuilder('b')
+            ->leftJoin('b.service', 's')
+            ->leftJoin('b.molecule', 'm')
+            ->leftJoin('b.user', 'u')
+            ->addSelect('s')
+            ->addSelect('m')
+            ->orderBy('b.date', 'DESC')
+            ->where('b.user = NULL');
+    }
+    public function getAllWithMedic() {
+        $qb = $this->createQueryBuilder('b')
+                   ->leftJoin('b.service', 's')
+                   ->leftJoin('b.molecule', 'm')
+                   ->leftJoin('m.medicament','me')
+                   ->addSelect('s')
+                   ->addSelect('m')
+                   ->addSelect('me')
+                   ->orderBy('b.date', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

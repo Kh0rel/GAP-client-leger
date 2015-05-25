@@ -41,8 +41,10 @@ class Molecule
      * @ORM\Column(name="etatMol", type="string", length=255)
      */
     private $etatMol;
-
-
+    /**
+     * @ORM\ManyToMany(targetEntity="GAP\StockManagementBundle\Entity\Medicament", cascade={"persist"})
+     */
+    private $medicament;
     /**
      * Get id
      *
