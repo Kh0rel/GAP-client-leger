@@ -51,7 +51,7 @@ class Besoin {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="valid", type="boolean")
+     * @ORM\Column(name="valid", type="boolean", nullable=true)
      */
     private $valid;
 
