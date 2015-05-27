@@ -22,7 +22,7 @@ class BesoinRepository extends EntityRepository {
             ->addSelect('s')
             ->addSelect('m')
             ->addSelect('u')
-            ->where('u.id = ?1 AND b.valid = 0')
+            ->where('u.id = ?1 AND b.valid is NULL')
             ->setParameter(1, $idUsername);
 
         return $qb->getQuery()->getResult();
@@ -33,7 +33,7 @@ class BesoinRepository extends EntityRepository {
                    ->leftJoin('b.molecule','m')
                    ->addSelect('s')
                    ->addSelect('m')
-                   ->where('b.valid = 0');
+                   ->where('b.valid is NULL');
 
         return $qb->getQuery()->getResult();
     }
