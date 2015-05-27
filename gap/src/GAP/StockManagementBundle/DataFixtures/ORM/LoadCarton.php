@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use GAP\StockManagementBundle\Entity\Medicament;
 
-class LoadMedicament implements FixtureInterface
+class LoadCarton implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {

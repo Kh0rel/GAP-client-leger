@@ -75,7 +75,7 @@ class Medicament {
     /**
      * @var integer
      *
-     * @ORM\Column(name="quantite", type="integer")
+     * @ORM\Column(name="quantite", type="integer", nullable= true)
      */
     private $quantite;
     /**

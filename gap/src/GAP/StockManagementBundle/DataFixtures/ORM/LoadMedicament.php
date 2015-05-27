@@ -16,6 +16,7 @@ class LoadMedicament implements FixtureInterface
         $listrefMed = array('45EFFXAE4','23XXEAZEFS', '25TGSEGTY');
         $listType = array('liquide','gazeux', 'Gellule');
         $listQuarantaine = array('false','false','false');
+        $listQuantite = array('10','3','23');
         $listStockMini = array('12','13','22');
         $listStockCritique = array('4','5','10');
         $listDosage = array('500mg','1000mg','500mg');
@@ -30,6 +31,7 @@ class LoadMedicament implements FixtureInterface
             $medicament->setRefMed($listrefMed[$i]);
             $medicament->setTypeMed($listType[$i]);
             $medicament->setQuarantaine($listQuarantaine[$i]);
+            $medicament->setQuantite($listQuantite[$i]);
             $medicament->setStockMini($listStockMini[$i]);
             $medicament->setStockCritique($listStockCritique[$i]);
             $medicament->setDosage($listDosage[$i]);
